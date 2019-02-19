@@ -38,10 +38,10 @@ public class Drivetrain extends Subsystem {
 
   public void stickdrive(double speed, double angle)
   {
-    frw.set((speed+angle)*-1);
-    flw.set((speed+angle)*1);
-    brw.set((speed+angle)*-1);
-    blw.set((speed+angle)*1);
+    frw.set(angle-speed);
+    flw.set(speed+angle);
+    brw.set(angle-speed);
+    blw.set(speed+angle);
 
   }
 
