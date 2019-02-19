@@ -102,7 +102,7 @@ public class OI {
   public OI()
   {
     stick = new Joystick(RobotMap.joystick);
-    new JoystickButton(stick, 0).toggleWhenPressed(new NoidCommander(true));
+    new JoystickButton(stick, 1).toggleWhenPressed(new NoidCommander(true));
     //new JoystickButton(stick, 1).toggleWhenPressed(NoidCommander(true));
   }
 
