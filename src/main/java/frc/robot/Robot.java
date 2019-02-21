@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.Cone;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Pecker;
 import frc.robot.RobotMap;
 
@@ -27,15 +27,18 @@ import frc.robot.RobotMap;
  * project.
  */
 public class Robot extends TimedRobot {
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
+  
+
   private String m_autoSelected;
-  private WPI_TalonSRX frwheel;
+/*private WPI_TalonSRX frwheel;
   private WPI_TalonSRX flwheel;
   private WPI_TalonSRX brwheel;
   private WPI_TalonSRX blwheel;
-  private WPI_TalonSRX lift;
-  public static Pecker p_subsystem = new Pecker();
+  */
+  private  WPI_TalonSRX lift;
+  public static final Pecker p_subsystem= new Pecker();
+  public static final Cone c_subsystem = new Cone();
+  public static final Drivetrain d_subsystem = new Drivetrain();
   //public static Drivetrain d_subsystem = new Drivetrain(blwheel, blwheel, blwheel, blwheel);
   public static OI m_oi;
 
@@ -46,6 +49,16 @@ public class Robot extends TimedRobot {
    @Override
   public void robotInit() {
     m_oi = new OI();
+    /*
+    frwheel = new WPI_TalonSRX(RobotMap.frw);
+    flwheel = new WPI_TalonSRX(RobotMap.flw);
+    brwheel = new WPI_TalonSRX(RobotMap.brw);
+    blwheel = new WPI_TalonSRX(RobotMap.blw);
+    */
+    lift = new WPI_TalonSRX(RobotMap.lift);
+    
+    
+    
   }
 
   /**
@@ -72,6 +85,8 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+
+
   }
 
   /**
@@ -103,7 +118,8 @@ public class Robot extends TimedRobot {
   }
 
   /**
-   * This function is called periodically during autonomous.
+   * This function is called periodically during aut
+   * onomous.
    */
   @Override
   public void autonomousPeriodic() {
@@ -127,8 +143,11 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    //d_subsystem.stickdrive(m_oi.getStickY(),m_oi.getStickAngle());
+    //System.out.println("WOW YOU'RE CALLING STICKDRIVE YAY");
+    //System.out.println("stick y and angle are "+m_oi.getStickY()+" , "+m_oi.getStickAngle());
+    d_subsystem.stickdrive(m_oi.getJoystick().getY(),m_oi.getJoystick().getTwist(),(1+(m_oi.getJoystick().getThrottle()))*2);
   }
-
   /**
    * This function is called periodically during test mode.
    */

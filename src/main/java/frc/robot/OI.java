@@ -10,8 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.NoidCommander;
-import frc.robot.commands.NoidCommander;
+import frc.robot.commands.Peck;
+import frc.robot.commands.Bite;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -73,6 +73,7 @@ public class OI {
     {
       x = -x;
     }
+      System.out.println("sx: "+x);
       return x;
   }
 
@@ -96,14 +97,30 @@ public class OI {
     {
       y = -y;
     }
+    System.out.println("sy: "+y);
     return y;
   }
+  public double getStickAngle() {
+		double aDed = .05;
+		double in = stick.getTwist();
+		double a = in*in;
+		if (a <= aDed) {
+			a=0;
+		}else {
+			a = (a-aDed)/(1-aDed);
+		}
+		if (in<0) {
+			a=-a;
+    }
+    System.out.println("sa: "+a);
+		return a;
+	}
 
   public OI()
   {
     stick = new Joystick(RobotMap.joystick);
-    new JoystickButton(stick, 1).toggleWhenPressed(new NoidCommander(true));
-    //new JoystickButton(stick, 1).toggleWhenPressed(NoidCommander(true));
+    new JoystickButton(stick, 1).toggleWhenPressed(new Peck(true));
+    new JoystickButton(stick, 2).toggleWhenPressed(new Bite(true));
   }
 
 }

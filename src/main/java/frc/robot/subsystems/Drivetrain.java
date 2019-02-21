@@ -9,6 +9,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import frc.robot.commands.Stickdrive;
+import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
  * Add your docs here.
@@ -16,12 +19,12 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class Drivetrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  WPI_TalonSRX frw = new WPI_TalonSRX(RobotMap.frw);
+  WPI_TalonSRX flw = new WPI_TalonSRX(RobotMap.flw);
+  WPI_TalonSRX brw = new WPI_TalonSRX(RobotMap.brw);
+  WPI_TalonSRX blw = new WPI_TalonSRX(RobotMap.blw);
 
-  WPI_TalonSRX frw;
-  WPI_TalonSRX flw;
-  WPI_TalonSRX brw;
-  WPI_TalonSRX blw;
-
+  /*
   public Drivetrain(WPI_TalonSRX frw, WPI_TalonSRX flw, WPI_TalonSRX brw, WPI_TalonSRX blw)
   {
     this.frw = frw;
@@ -29,19 +32,25 @@ public class Drivetrain extends Subsystem {
     this.brw = brw;
     this.blw = blw;
   }
+  */
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    //setDefaultCommand(new Stickdrive(Robot.m_oi.getStickX(),Robot.m_oi.getStickAngle()));
+    //.out.println("you're initializing the default command for stickdrive");
   }
 
-  public void stickdrive(double speed, double angle)
+  public void stickdrive(double speed, double angle,double power)
   {
-    frw.set((speed+angle)*-1);
-    flw.set((speed+angle)*1);
-    brw.set((speed+angle)*-1);
-    blw.set((speed+angle)*1);
+    //System.out.println("you're calling stickdrive()! congratulations.");
+    //System.out.println("speed/angle: "+speed+" , "+angle);
+    frw.set(-(angle+speed)*power);
+    flw.set((speed-angle)*power);
+    brw.set(-(angle+speed)*power);
+    blw.set((speed-angle)*power);
+    //System.out.println("motor speeds are being set to "+(angle-speed)+" and "+(speed+angle));
 
   }
 

@@ -9,7 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.NoidCommander;
+import frc.robot.commands.Peck;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Compressor;
 
@@ -21,13 +21,14 @@ public class Pecker extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   Solenoid coneMovement = new Solenoid(0);
-  Solenoid coneOperation = new Solenoid(1);
+
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new NoidCommander(false));
+    setDefaultCommand(new Peck(false));
+
   }
 
 public void pushingNoid(boolean pressure)
@@ -35,10 +36,6 @@ public void pushingNoid(boolean pressure)
     coneMovement.set(pressure);
   }
 
-  public void openingNoid(boolean pressure)
-  { 
-    coneOperation.set(pressure);
-  }
 
   
 

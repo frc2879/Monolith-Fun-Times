@@ -10,10 +10,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class NoidCommander extends Command {
+public class Peck extends Command {
   private boolean pressurized;
 
-  public NoidCommander(boolean set) {
+  public Peck(boolean set) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     pressurized = set;
