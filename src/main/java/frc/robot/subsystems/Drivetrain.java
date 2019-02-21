@@ -23,6 +23,8 @@ public class Drivetrain extends Subsystem {
   WPI_TalonSRX flw = new WPI_TalonSRX(RobotMap.flw);
   WPI_TalonSRX brw = new WPI_TalonSRX(RobotMap.brw);
   WPI_TalonSRX blw = new WPI_TalonSRX(RobotMap.blw);
+  
+
 
   /*
   public Drivetrain(WPI_TalonSRX frw, WPI_TalonSRX flw, WPI_TalonSRX brw, WPI_TalonSRX blw)
@@ -30,7 +32,7 @@ public class Drivetrain extends Subsystem {
     this.frw = frw;
     this.flw = flw;
     this.brw = brw;
-    this.blw = blw;
+    this.blw = blw
   }
   */
 

@@ -158,6 +158,12 @@ public class Robot extends TimedRobot {
     double t = m_oi.getJoystick().getThrottle();
     //modify joystick doubles
     t*=-1;
+    if(Math.abs(x)<0.2){
+      x = 0;
+    }
+    if(Math.abs(y)<0.2){
+      y = 0;
+    }
     if(Math.abs(a)<0.5){
       a = 0;
     }
