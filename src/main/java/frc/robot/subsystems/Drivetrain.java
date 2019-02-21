@@ -44,7 +44,6 @@ public class Drivetrain extends Subsystem {
 
   public void stickdrive(double speed, double angle,double power)
   {
-<<<<<<< HEAD
     //System.out.println("you're calling stickdrive()! congratulations.");
     //System.out.println("speed/angle: "+speed+" , "+angle);
     frw.set(-(angle+speed)*power);
@@ -52,12 +51,6 @@ public class Drivetrain extends Subsystem {
     brw.set(-(angle+speed)*power);
     blw.set((speed-angle)*power);
     //System.out.println("motor speeds are being set to "+(angle-speed)+" and "+(speed+angle));
-=======
-    frw.set(angle-speed);
-    flw.set(speed+angle);
-    brw.set(angle-speed);
-    blw.set(speed+angle);
->>>>>>> 837c825670818085b10a6ea77d7491bd6f24be3f
 
   }
 
