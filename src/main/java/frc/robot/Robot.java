@@ -148,7 +148,21 @@ public class Robot extends TimedRobot {
     //d_subsystem.stickdrive(m_oi.getStickY(),m_oi.getStickAngle());
     //System.out.println("WOW YOU'RE CALLING STICKDRIVE YAY");
     //System.out.println("stick y and angle are "+m_oi.getStickY()+" , "+m_oi.getStickAngle());
-    d_subsystem.stickdrive(m_oi.getJoystick().getY(),m_oi.getJoystick().getTwist(),(1+(m_oi.getJoystick().getThrottle()))*2);
+    
+    //this part *should* be implemented as a command class but it was causing problems so I'm just bypassing it
+
+    //get joystick doubles
+    double x = m_oi.getJoystick().getX();
+    double y = m_oi.getJoystick().getY();
+    double a = m_oi.getJoystick().getTwist();
+    double t = m_oi.getJoystick().getThrottle();
+    //modify joystick doubles
+    t*=-1;
+    if(Math.abs(a)<0.5){
+      a = 0;
+    }
+    //drive
+    d_subsystem.stickdrive(y,a*2,(1.25+t)*.75);
   }
   /**
    * This function is called periodically during test mode.

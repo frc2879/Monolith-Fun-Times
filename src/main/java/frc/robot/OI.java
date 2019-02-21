@@ -73,7 +73,7 @@ public class OI {
     {
       x = -x;
     }
-      System.out.println("sx: "+x);
+      //System.out.println("sx: "+x);
       return x;
   }
 
@@ -97,7 +97,7 @@ public class OI {
     {
       y = -y;
     }
-    System.out.println("sy: "+y);
+    //System.out.println("sy: "+y);
     return y;
   }
   public double getStickAngle() {
@@ -112,7 +112,7 @@ public class OI {
 		if (in<0) {
 			a=-a;
     }
-    System.out.println("sa: "+a);
+    //System.out.println("sa: "+a);
 		return a;
 	}
 
