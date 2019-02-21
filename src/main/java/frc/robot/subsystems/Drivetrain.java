@@ -12,6 +12,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.robot.commands.Stickdrive;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 
 /**
  * Add your docs here.
@@ -25,16 +27,18 @@ public class Drivetrain extends Subsystem {
   WPI_TalonSRX blw = new WPI_TalonSRX(RobotMap.blw);
   
 
+  
 
-  /*
-  public Drivetrain(WPI_TalonSRX frw, WPI_TalonSRX flw, WPI_TalonSRX brw, WPI_TalonSRX blw)
+
+  
+  public Drivetrain()
   {
-    this.frw = frw;
-    this.flw = flw;
-    this.brw = brw;
-    this.blw = blw
+    frw.setNeutralMode(NeutralMode.Brake);
+    flw.setNeutralMode(NeutralMode.Brake);
+    brw.setNeutralMode(NeutralMode.Brake);
+    blw.setNeutralMode(NeutralMode.Brake);
   }
-  */
+  
 
   @Override
   public void initDefaultCommand() {
@@ -46,6 +50,12 @@ public class Drivetrain extends Subsystem {
 
   public void stickdrive(double speed, double angle,double power)
   {
+    /*
+    frw.setNeutralMode(NeutralMode.Brake);
+    flw.setNeutralMode(NeutralMode.Brake);
+    brw.setNeutralMode(NeutralMode.Brake);
+    blw.setNeutralMode(NeutralMode.Brake);
+    */
     //System.out.println("you're calling stickdrive()! congratulations.");
     //System.out.println("speed/angle: "+speed+" , "+angle);
     frw.set(-(angle+speed)*power);
