@@ -11,6 +11,7 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -20,6 +21,8 @@ import frc.robot.subsystems.Cone;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Pecker;
 import frc.robot.RobotMap;
+import edu.wpi.cscore.VideoSource;
+import edu.wpi.first.wpilibj.CameraServer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -58,6 +61,14 @@ public class Robot extends TimedRobot {
     blwheel = new WPI_TalonSRX(RobotMap.blw);
     */
     lift = new WPI_TalonSRX(RobotMap.lift);
+    CameraServer camera = CameraServer.getInstance();
+    VideoSource front = camera.startAutomaticCapture("cam0" , 0);
+    VideoSource back = camera.startAutomaticCapture("cam1" , 1);
+    front.setFPS(25);
+    back.setFPS(25);
+    front.setResolution(16,9);
+    back.setResolution(16,9);
+
     
     
     
