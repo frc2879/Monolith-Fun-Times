@@ -178,8 +178,21 @@ public class Robot extends TimedRobot {
     if(Math.abs(a)<0.5){
       a = 0;
     }
+    double speed = y/2;
+    double angle = a*2;
+    double power = (1.25+t)*.5;
+    double total = (Math.abs(speed)+Math.abs(angle))*Math.abs(power);
+    System.out.println("raw total: "+total);
+    if(total>1){
+
+      double ratio = 1/total;
+      power*=ratio;
+      System.out.println("cooked total: "+total);
+    
+    }
+
     //drive
-    d_subsystem.stickdrive(y,a*2,(1.25+t)*.75);
+    d_subsystem.stickdrive(speed,angle,power);
   }
   /**
    * This function is called periodically during test mode.
