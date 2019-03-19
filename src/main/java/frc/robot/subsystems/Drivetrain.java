@@ -56,7 +56,7 @@ public class Drivetrain extends Subsystem {
   public void stickdrive(double power)
   {
     //change inputs to stick vals 
-    double speed=Robot.m_oi.getStickY();
+    double speed=Robot.m_oi.getJoystick().getY();
     double angle =Robot.m_oi.getStickAngle();
 
     /*
@@ -65,9 +65,28 @@ public class Drivetrain extends Subsystem {
     brw.setNeutralMode(NeutralMode.Brake);
     blw.setNeutralMode(NeutralMode.Brake);
     */
+    
     double rs=-(angle+speed)*power;
     double ls=(speed-angle)*power;
 
+    if(rs>1){
+      ls*=(1/rs);
+      rs*=1/rs;
+    }
+    if(rs<-1){
+      ls*=-(1/rs);
+      rs*=-1/rs;
+    }
+    if(ls>1){
+      rs*=(1/ls);
+      ls*=1/ls;
+    }
+    if(ls<-1){
+      rs*=-(1/ls);
+      ls*=-1/ls;
+    }
+    
+    /*
     if(angle>0.1){
       ls=(ls+1.0)/2.0;
       rs=0.0;
@@ -93,8 +112,12 @@ public class Drivetrain extends Subsystem {
         return;
       }
     }
+    */
     //System.out.println("you're calling stickdrive()! congratulations.");
     //System.out.println("speed/angle: "+speed+" , "+angle);
+    System.out.println("s: "+speed);
+    System.out.println("r: "+rs);
+    System.out.println("l: "+ls);
     frw.set(rs);
     flw.set(ls);
     brw.set(rs);
