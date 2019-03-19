@@ -24,9 +24,9 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-    public static final int frw = 1;
+    public static final int frw = 4;
     public static final int flw = 2;
-    public static final int brw = 4;
+    public static final int brw = 1;
     public static final int blw = 3;
     public static final int lift = 0;
     public static final int joystick = 0;

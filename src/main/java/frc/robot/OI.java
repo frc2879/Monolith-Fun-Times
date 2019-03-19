@@ -55,7 +55,7 @@ public class OI {
 
   public double getStickX()
   {
-    double xDed = .05;
+    double xDed = .2;
     double in = stick.getX();
     double x = in*in;
 
@@ -79,7 +79,7 @@ public class OI {
 
   public double getStickY()
   {
-    double yDed = .05;
+    double yDed = .2;
     double in = stick.getY();
     double y = in*in;
 
@@ -101,7 +101,7 @@ public class OI {
     return y;
   }
   public double getStickAngle() {
-		double aDed = .05;
+		double aDed = .2;
 		double in = stick.getTwist();
 		double a = in*in;
 		if (a <= aDed) {

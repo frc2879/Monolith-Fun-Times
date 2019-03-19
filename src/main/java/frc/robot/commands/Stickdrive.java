@@ -41,7 +41,7 @@ public class Stickdrive extends Command {
   @Override
   protected void execute() {
     //System.out.println("you're executing the Stickdrive class.");
-    Robot.d_subsystem.stickdrive(speed,angle,power);
+    Robot.d_subsystem.stickdrive(power);
     //System.out.println("speed and angle are "+ speed+", "+angle);
 
   }

@@ -163,36 +163,12 @@ public class Robot extends TimedRobot {
     //this part *should* be implemented as a command class but it was causing problems so I'm just bypassing it
 
     //get joystick doubles
-    double x = m_oi.getJoystick().getX();
-    double y = m_oi.getJoystick().getY();
-    double a = m_oi.getJoystick().getTwist();
+
     double t = m_oi.getJoystick().getThrottle();
-    //modify joystick doubles
-    t*=-1;
-    if(Math.abs(x)<0.2){
-      x = 0;
-    }
-    if(Math.abs(y)<0.2){
-      y = 0;
-    }
-    if(Math.abs(a)<0.5){
-      a = 0;
-    }
-    double speed = y/2;
-    double angle = a*2;
-    double power = (1.25+t)*.5;
-    double total = (Math.abs(speed)+Math.abs(angle))*Math.abs(power);
-    System.out.println("raw total: "+total);
-    if(total>1){
-
-      double ratio = 1/total;
-      power*=ratio;
-      System.out.println("cooked total: "+total);
     
-    }
-
+    double power = (1.25-t)*.5;
     //drive
-    d_subsystem.stickdrive(speed,angle,power);
+    d_subsystem.stickdrive(1.0);
   }
   /**
    * This function is called periodically during test mode.
