@@ -101,6 +101,8 @@ public class OI {
     return y;
   }
   public double getStickAngle() {
+  
+  
 		double aDed = .2;
 		double in = stick.getTwist();
 		double a = in*in;
