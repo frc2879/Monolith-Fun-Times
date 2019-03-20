@@ -67,8 +67,9 @@ public class Drivetrain extends Subsystem {
     */
     
     double rs=-(angle+speed)*power;
-    double ls=(speed-angle)*power;
+    double ls=(speed+angle)*power;
 
+    /*
     if(rs>1){
       ls*=(1/rs);
       rs*=1/rs;
@@ -85,10 +86,10 @@ public class Drivetrain extends Subsystem {
       rs*=-(1/ls);
       ls*=-1/ls;
     }
+    */
     
-    /*
     if(angle>0.1){
-      ls=(ls+1.0)/2.0;
+      ls=(-(ls+1.0))/2.0;
       rs=0.0;
     }
 
@@ -112,7 +113,7 @@ public class Drivetrain extends Subsystem {
         return;
       }
     }
-    */
+    
     //System.out.println("you're calling stickdrive()! congratulations.");
     //System.out.println("speed/angle: "+speed+" , "+angle);
     System.out.println("s: "+speed);
