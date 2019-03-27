@@ -166,7 +166,7 @@ public class Robot extends TimedRobot {
 
     double t = m_oi.getJoystick().getThrottle();
     
-    double power = (1.25-t)*.5;
+    double power = (1.25-t);
     //drive
     d_subsystem.stickdrive(1.0);
   }

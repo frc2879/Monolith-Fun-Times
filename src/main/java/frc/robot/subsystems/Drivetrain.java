@@ -29,7 +29,7 @@ public class Drivetrain extends Subsystem {
   WPI_TalonSRX blw = new WPI_TalonSRX(RobotMap.blw);
   //DifferentialDrive m_drive;
   
-
+  private static final double outerWheelWeight = .75;
   
 
 
@@ -58,6 +58,7 @@ public class Drivetrain extends Subsystem {
     //change inputs to stick vals 
     double speed=Robot.m_oi.getJoystick().getY();
     double angle =Robot.m_oi.getStickAngle();
+
 
     /*
     frw.setNeutralMode(NeutralMode.Brake);
@@ -101,16 +102,20 @@ public class Drivetrain extends Subsystem {
 
     if(Math.abs(speed)<.2){
       if(angle>0.0){
-        flw.set(-1.0);
-        brw.set(-1.0);
+        flw.set(-angle*outerWheelWeight);
+        frw.set(-angle);
+        brw.set(-angle);
+        blw.set(-angle*outerWheelWeight);
         return;
       }
   
-      \
+      
       if(angle<0.0)
       {
-        frw.set(1.0);
-        blw.set(1.0);
+        frw.set(-angle*outerWheelWeight);
+        flw.set(-angle);
+        brw.set(-angle*outerWheelWeight);
+        blw.set(-angle);
         return;
       }
     }
