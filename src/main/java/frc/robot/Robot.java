@@ -64,13 +64,13 @@ public class Robot extends TimedRobot {
     CameraServer camera = CameraServer.getInstance();
     VideoSource front = camera.startAutomaticCapture("cam0" , 0);
     VideoSource back = camera.startAutomaticCapture("cam1" , 1);
-    front.setFPS(25);
-    back.setFPS(25);
-    front.setResolution(16,9);
-    back.setResolution(16,9);
-
     
-    
+    VideoSource[] cameras = {front, back};
+    for(int i = 0; i<cameras.length; i++)
+    {
+      cameras[i].setFPS(25);
+      cameras[i].setResolution(16,9);
+    }
     
   }
 
@@ -168,7 +168,7 @@ public class Robot extends TimedRobot {
     
     double power = (1.25-t);
     //drive
-    d_subsystem.stickdrive(1.0);
+    d_subsystem.stickdrive(power);
   }
   /**
    * This function is called periodically during test mode.

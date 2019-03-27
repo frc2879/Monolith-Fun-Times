@@ -23,6 +23,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 public class Drivetrain extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+ 
   WPI_TalonSRX frw = new WPI_TalonSRX(RobotMap.frw);
   WPI_TalonSRX flw = new WPI_TalonSRX(RobotMap.flw);
   WPI_TalonSRX brw = new WPI_TalonSRX(RobotMap.brw);
@@ -70,24 +71,9 @@ public class Drivetrain extends Subsystem {
     double rs=-(angle+speed)*power;
     double ls=(speed+angle)*power;
 
-    /*
-    if(rs>1){
-      ls*=(1/rs);
-      rs*=1/rs;
-    }
-    if(rs<-1){
-      ls*=-(1/rs);
-      rs*=-1/rs;
-    }
-    if(ls>1){
-      rs*=(1/ls);
-      ls*=1/ls;
-    }
-    if(ls<-1){
-      rs*=-(1/ls);
-      ls*=-1/ls;
-    }
-    */
+
+    double OTWS = -angle*outerWheelWeight; //Outer Wheel Speed When Spinning in Place.
+    double INWS = -angle; //Inner Wheel Speed When SPinning in Place.
     
     if(angle>0.1){
       ls=(-(ls+1.0))/2.0;
@@ -102,20 +88,20 @@ public class Drivetrain extends Subsystem {
 
     if(Math.abs(speed)<.2){
       if(angle>0.0){
-        flw.set(-angle*outerWheelWeight);
-        frw.set(-angle);
-        brw.set(-angle);
-        blw.set(-angle*outerWheelWeight);
+        flw.set(OTWS);
+        blw.set(OTWS);
+        frw.set(INWS);
+        brw.set(INWS);
         return;
       }
   
       
       if(angle<0.0)
       {
-        frw.set(-angle*outerWheelWeight);
-        flw.set(-angle);
-        brw.set(-angle*outerWheelWeight);
-        blw.set(-angle);
+        frw.set(OTWS);
+        brw.set(OTWS);
+        flw.set(INWS);
+        blw.set(INWS);
         return;
       }
     }
