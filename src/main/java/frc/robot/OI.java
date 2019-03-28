@@ -122,7 +122,7 @@ public class OI {
   {
     stick = new Joystick(RobotMap.joystick);
     new JoystickButton(stick, 1).toggleWhenPressed(new Peck(true));
-    new JoystickButton(stick, 2).toggleWhenPressed(new Bite(true));
+    new JoystickButton(stick, 2).whileHeld(new Bite(true));
   }
 
 }

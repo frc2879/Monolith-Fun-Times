@@ -30,7 +30,7 @@ public class Drivetrain extends Subsystem {
   WPI_TalonSRX blw = new WPI_TalonSRX(RobotMap.blw);
   //DifferentialDrive m_drive;
   
-  private static final double outerWheelWeight = .75;
+  private static final double innerWheelWeight = .75;
   
 
 
@@ -72,8 +72,8 @@ public class Drivetrain extends Subsystem {
     double ls=(speed+angle)*power;
 
 
-    double OTWS = -angle*outerWheelWeight; //Outer Wheel Speed When Spinning in Place.
-    double INWS = -angle; //Inner Wheel Speed When SPinning in Place.
+    double INWS = -angle*innerWheelWeight; //Outer Wheel Speed When Spinning in Place.
+    double OTWS = -angle; //Inner Wheel Speed When SPinning in Place.
     
     if(angle>0.1){
       ls=(-(ls+1.0))/2.0;

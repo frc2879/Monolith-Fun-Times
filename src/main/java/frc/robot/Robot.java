@@ -137,20 +137,38 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+
+    double t = m_oi.getJoystick().getThrottle();
+  
+    if(t<=0.0)
+    {
+      t = .9;
+    }
+    else
+    {
+      t = .65;
+    }
+
+    //drive
+    d_subsystem.stickdrive(t);
+
   }
 
-  /*@Override
+  @Override
   public void teleopInit() {
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
-    // this line or comment it out.
+   //  this line or comment it out.
    /* if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+    
     }
+    */
+
   }
 
-  /**
+  /** 
    * This function is called periodically during operator control.
    */
   @Override
@@ -166,9 +184,17 @@ public class Robot extends TimedRobot {
 
     double t = m_oi.getJoystick().getThrottle();
     
-    double power = (1.25-t);
+    if(t>=0.0)
+    {
+      t = .9;
+    }
+    else
+    {
+      t = .65;
+    }
+
     //drive
-    d_subsystem.stickdrive(power);
+    d_subsystem.stickdrive(t);
   }
   /**
    * This function is called periodically during test mode.
