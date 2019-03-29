@@ -83,11 +83,11 @@ public class OI {
     double in = stick.getY();
     double y = in*in;
 
-    if(y<= yDed)
+    if(Math.abs(y)<= yDed)
     {
       y = 0;
     }
-
+    /*
     else
     {
       y = (y - (y-yDed)/(1-yDed));
@@ -97,6 +97,7 @@ public class OI {
     {
       y = -y;
     }
+    */
     //System.out.println("sy: "+y);
     return y;
   }
@@ -106,14 +107,16 @@ public class OI {
 		double aDed = .2;
 		double in = stick.getTwist();
 		double a = in*in;
-		if (a <= aDed) {
+		if (Math.abs(a) <= aDed) {
 			a=0;
-		}else {
+        } 
+    /*	}else {
 			a = (a-aDed)/(1-aDed);
 		}
 		if (in<0) {
 			a=-a;
     }
+    */
     //System.out.println("sa: "+a);
 		return a;
 	}

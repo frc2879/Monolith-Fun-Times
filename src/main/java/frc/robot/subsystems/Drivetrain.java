@@ -70,7 +70,7 @@ public class Drivetrain extends Subsystem {
     brw.setNeutralMode(NeutralMode.Brake);
     blw.setNeutralMode(NeutralMode.Brake);
     */
-    double rs=(speed-angle)*power;
+    double rs=-(speed-angle)*power;
     double ls=(speed+angle)*power;
     double WWSG = -angle*spinWheelWeight; //Wheel Speed When Spinning in Place. They will be spinning at 45 percent speed.
     
