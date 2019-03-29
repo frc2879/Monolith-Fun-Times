@@ -8,12 +8,16 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import frc.robot.commands.DriveMecanum;
 import frc.robot.commands.Stickdrive;
+
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 
@@ -29,15 +33,17 @@ public class Drivetrain extends Subsystem {
   WPI_TalonSRX brw = new WPI_TalonSRX(RobotMap.brw);
   WPI_TalonSRX blw = new WPI_TalonSRX(RobotMap.blw);
   MecanumDrive mecanum_drive;
-  //DifferentialDrive m_drive;
+  //DifferentialDrive mh_drive;
   
   private static final double spinWheelWeight = .45;
   
   public Drivetrain()
   {
     frw.setNeutralMode(NeutralMode.Coast);
+    frw.setInverted(true);
     flw.setNeutralMode(NeutralMode.Coast);
     brw.setNeutralMode(NeutralMode.Coast);
+    brw.setInverted(true);
     blw.setNeutralMode(NeutralMode.Coast);
     //DifferentialDrive m_drive = new DifferentialDrive(flw, frw);
     mecanum_drive = new  MecanumDrive(flw,blw,frw,brw);
@@ -47,15 +53,15 @@ public class Drivetrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new Stickdrive(1.0));
+    // setDefaultCommand(new Stickdrive(1.0));
+    setDefaultCommand(new DriveMecanum(1.0));
     //.out.println("you're initializing the default command for stickdrive");
   }
 
   public void stickdrive(double power)
   {
     //change inputs to stick vals 
-    double speed=Robot.m_oi.getJoystick().getStickY();
+    double speed=Robot.m_oi.getStickY();
     double angle =Robot.m_oi.getStickAngle();
 
     /*
@@ -95,55 +101,18 @@ public class Drivetrain extends Subsystem {
     System.out.println("s: "+speed);
     System.out.println("r: "+rs);
     System.out.println("l: "+ls);
-    setWheel(RIGHT,FRONT,rs)
-    setWheel(LEFT,FRONT,ls)
-    setWheel(RIGHT,BACK,rs)
-    setWheel(LEFT,BACK,ls)
+    frw.set(rs);
+    flw.set(ls);
+    brw.set(rs);
+    blw.set(ls);
     //System.out.println("motor speeds are being set to "+(angle-speed)+" and "+(speed+angle));
   } 
  
   public void mecanum_drive(double power)
   {
-    double yspeed=Robot.m_oi.getJoystick().getStickY();
-    double xspeed=Robot.m_oi.getJoystick().getStickX();
+    double yspeed=Robot.m_oi.getStickY();
+    double xspeed=Robot.m_oi.getStickX();
     double angle =Robot.m_oi.getStickAngle();
     mecanum_drive.driveCartesian(yspeed,xspeed,angle);
     }
-
-
-    private void setRightMotor(WPI_TalonSRX talon, double p) {
-        talon.set(-p);
-    }
-
-
-    private void setLeftMotor(WPI_TalonSRX talon, double p) {
-        talon.set(p);
-    }
-
-    private void setWheel(WheelLocation x,WheelLocation y, Double s){
-      if(x == RIGHT){
-        if(y == FRONT){
-          frw.set(-s);
-        }
-        if(y == BACK){
-          fbw.set(-s);
-        }
-      }
-      if(x == LEFT){
-        if(y == FRONT){
-          flw.set(s);
-        }
-        if(y == BACK){
-          blw.set(s)
-        }
-      }
-    }
-
-    private enum WheelLocation {
-      RIGHT,
-      LEFT,
-      FRONT,
-      BACK
-    }
-
-  }
+ }
