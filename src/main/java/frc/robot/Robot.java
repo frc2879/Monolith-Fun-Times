@@ -32,8 +32,6 @@ import edu.wpi.first.wpilibj.CameraServer;
  * project.
  */
 public class Robot extends TimedRobot {
-  
-
   private String m_autoSelected;
 /*private WPI_TalonSRX frwheel;
   private WPI_TalonSRX flwheel;
@@ -113,9 +111,9 @@ public class Robot extends TimedRobot {
    * chooser code above (like the commented example) or additional comparisons
    * to the switch structure below with additional strings & commands.
    */
- /* @Override
+  @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
+    //m_autonomousCommand = m_chooser.getSelected();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -125,9 +123,7 @@ public class Robot extends TimedRobot {
      */
 
     // schedule the autonomous command (example)
-   /* if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
+    
   }
 
   /**
@@ -137,20 +133,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
-
-    double t = m_oi.getJoystick().getThrottle();
-  
-    if(t>=.0)
-    {
-      t = .9;
-    }
-    else
-    {
-      t = .65;
-    }
-
-    //drive
-    d_subsystem.stickdrive(t);
 
   }
 
@@ -174,27 +156,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    //d_subsystem.stickdrive(m_oi.getStickY(),m_oi.getStickAngle());
-    //System.out.println("WOW YOU'RE CALLING STICKDRIVE YAY");
-    //System.out.println("stick y and angle are "+m_oi.getStickY()+" , "+m_oi.getStickAngle());
     
-    //this part *should* be implemented as a command class but it was causing problems so I'm just bypassing it
-
-    //get joystick doubles
-
-    double t = m_oi.getJoystick().getThrottle();
-    
-    if(t>=0.0)
-    {
-      t = .9;
-    }
-    else
-    {
-      t = .65;
-    }
-
-    //drive
-    d_subsystem.stickdrive(t);
   }
   /**
    * This function is called periodically during test mode.

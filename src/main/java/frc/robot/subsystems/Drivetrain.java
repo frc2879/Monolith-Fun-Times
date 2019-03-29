@@ -28,12 +28,10 @@ public class Drivetrain extends Subsystem {
   WPI_TalonSRX flw = new WPI_TalonSRX(RobotMap.flw);
   WPI_TalonSRX brw = new WPI_TalonSRX(RobotMap.brw);
   WPI_TalonSRX blw = new WPI_TalonSRX(RobotMap.blw);
+  MecanumDrive mecanum_drive;
   //DifferentialDrive m_drive;
   
   private static final double spinWheelWeight = .45;
-  
-
-
   
   public Drivetrain()
   {
@@ -42,24 +40,23 @@ public class Drivetrain extends Subsystem {
     brw.setNeutralMode(NeutralMode.Coast);
     blw.setNeutralMode(NeutralMode.Coast);
     //DifferentialDrive m_drive = new DifferentialDrive(flw, frw);
+    mecanum_drive = new  MecanumDrive(flw,blw,frw,brw);
 
   }
   
-
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    //setDefaultCommand(new Stickdrive(Robot.m_oi.getStickX(),Robot.m_oi.getStickAngle()));
+    setDefaultCommand(new Stickdrive(1.0));
     //.out.println("you're initializing the default command for stickdrive");
   }
 
   public void stickdrive(double power)
   {
     //change inputs to stick vals 
-    double speed=Robot.m_oi.getJoystick().getY();
+    double speed=Robot.m_oi.getJoystick().getStickY();
     double angle =Robot.m_oi.getStickAngle();
-
 
     /*
     frw.setNeutralMode(NeutralMode.Brake);
@@ -67,44 +64,14 @@ public class Drivetrain extends Subsystem {
     brw.setNeutralMode(NeutralMode.Brake);
     blw.setNeutralMode(NeutralMode.Brake);
     */
-    
     double rs=-(angle+speed)*power;
     double ls=(speed+angle)*power;
-
-
     double WWSG = -angle*spinWheelWeight; //Wheel Speed When SPinning in Place. They will be spinning at .45 percentn speed.
     
-    if(angle>0.1){
-      ls=(-(ls+1.0))/2.0;
-      rs=0.0;
-    }
-
-    if(angle<-0.1)
-    {
-      rs=(rs+1.0)/2.0;
-      ls=0.0;
-    }
-
-    if(Math.abs(speed)<.2){
-      if(angle>0.0){
-        flw.set(WWSG);
-        blw.set(WWSG);
-        frw.set(WWSG);
-        brw.set(WWSG);
-        return;
-      }
-  
-      
-      if(angle<0.0)
-      {
-        frw.set(WWSG);
-        brw.set(WWSG);
-        flw.set(WWSG);
-        blw.set(WWSG);
-        return;
-      }
-    }
-    
+    if(angle>0.1){ls=(-(ls+1.0))/2.0;rs=0.0;
+    }if(angle<-0.1){ rs=(rs+1.0)/2.0;ls=0.0;
+    }if(Math.abs(speed)<.2){if(angle>0.0){flw.set(WWSG);blw.set(WWSG);frw.set(WWSG);brw.set(WWSG);return;
+    }if(angle<0.0){frw.set(WWSG);brw.set(WWSG);flw.set(WWSG);blw.set(WWSG);return;}}    
     //System.out.println("you're calling stickdrive()! congratulations.");
     //System.out.println("speed/angle: "+speed+" , "+angle);
     System.out.println("s: "+speed);
@@ -115,9 +82,13 @@ public class Drivetrain extends Subsystem {
     brw.set(rs);
     blw.set(ls);
     //System.out.println("motor speeds are being set to "+(angle-speed)+" and "+(speed+angle));
-
-  }
-
-  
-
+  } 
+ 
+  public void mecanum_drive(double power)
+  {
+    double yspeed=Robot.m_oi.getJoystick().getStickY();
+    double xspeed=Robot.m_oi.getJoystick().getStickX();
+    double angle =Robot.m_oi.getStickAngle();
+    mecanum_drive.driveCartesian(yspeed,xspeed,angle);
+    }
 }

@@ -6,12 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 
-
-
-//UNUSED
-
-
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,12 +16,11 @@ public class Stickdrive extends Command {
   private double speed;
   private double angle;
   private double power;
-  public Stickdrive(double s,double a,double p) {
+  public Stickdrive(double p) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     
-    speed = s;
-    angle = a;
+  
     power = p;
     requires(Robot.d_subsystem);
   }
@@ -42,8 +35,7 @@ public class Stickdrive extends Command {
   protected void execute() {
     //System.out.println("you're executing the Stickdrive class.");
     Robot.d_subsystem.stickdrive(power);
-    //System.out.println("speed and angle are "+ speed+", "+angle);
-
+    //System.out.println("speed and angle are "+ speed +", "+angle);
   }
 
   // Make this return true when this Command no longer needs to run execute()
