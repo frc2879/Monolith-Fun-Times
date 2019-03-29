@@ -53,8 +53,11 @@ public class Drivetrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     
-    // setDefaultCommand(new Stickdrive(1.0));
-    setDefaultCommand(new DriveMecanum(1.0));
+    if(true){
+      setDefaultCommand(new Stickdrive(1.0));
+    } else {
+      setDefaultCommand(new DriveMecanum(1.0));
+    }
     //.out.println("you're initializing the default command for stickdrive");
   }
 
