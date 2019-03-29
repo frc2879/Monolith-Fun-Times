@@ -75,7 +75,7 @@ public class Drivetrain extends Subsystem {
     double WWSG = -angle*spinWheelWeight; //Wheel Speed When Spinning in Place. They will be spinning at 45 percent speed.
     
     if(angle>0.1){
-      ls=((ls+1.0))/2.0;rs=0.0;
+      ls=(ls+1.0)/2.0;rs=0.0;
     }
     if(angle<-0.1){
       rs=(rs+1.0)/2.0;ls=0.0;
