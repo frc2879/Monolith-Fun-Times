@@ -53,13 +53,16 @@ public class Drivetrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    setDefaultCommand(new Stickdrive(0.5));
+    
+    setDefaultCommand(new Stickdrive(1.0));
     //setDefaultCommand(new DriveMecanum(1.0));
     //.out.println("you're initializing the default command for stickdrive");
   }
 
   public void stickdrive(double power)
   {
+    double t =Robot.m_oi.getJoystick().getThrottle();
+    t=RobotMap.lowpower+(RobotMap.highpower-RobotMap.lowpower)*((t+1)/2);
     //change inputs to stick vals 
     double speed=Robot.m_oi.getJoystick().getY();
     double angle =Robot.m_oi.getJoystick().getTwist();
@@ -72,8 +75,8 @@ public class Drivetrain extends Subsystem {
     brw.setNeutralMode(NeutralMode.Brake);
     blw.setNeutralMode(NeutralMode.Brake);
     */
-    double rs=(speed+angle)*power;
-    double ls=(speed-angle)*power;
+    double rs=(speed+angle)*power*t;
+    double ls=(speed-angle)*power*t;
     double WWSG = -angle*spinWheelWeight; //Wheel Speed When Spinning in Place. They will be spinning at 45 percent speed.
     
     /*
