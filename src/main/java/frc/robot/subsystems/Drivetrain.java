@@ -40,10 +40,9 @@ public class Drivetrain extends Subsystem {
   public Drivetrain()
   {
     frw.setNeutralMode(NeutralMode.Coast);
-    frw.setInverted(true);
     flw.setNeutralMode(NeutralMode.Coast);
     brw.setNeutralMode(NeutralMode.Coast);
-    brw.setInverted(true);
+    
     blw.setNeutralMode(NeutralMode.Coast);
     //DifferentialDrive m_drive = new DifferentialDrive(flw, frw);
     mecanum_drive = new  MecanumDrive(flw,blw,frw,brw);
@@ -54,13 +53,17 @@ public class Drivetrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     
-    setDefaultCommand(new Stickdrive(1.0));
-    //setDefaultCommand(new DriveMecanum(1.0));
+    // setDefaultCommand(new Stickdrive(1.0));
+    setDefaultCommand(new DriveMecanum(1.0));
     //.out.println("you're initializing the default command for stickdrive");
   }
 
   public void stickdrive(double power)
   {
+
+    brw.setInverted(true);
+    frw.setInverted(true);
+
     double t =Robot.m_oi.getJoystick().getThrottle();
     t=RobotMap.lowpower+(RobotMap.highpower-RobotMap.lowpower)*((t+1)/2);
     //change inputs to stick vals 
@@ -117,9 +120,17 @@ public class Drivetrain extends Subsystem {
  
   public void mecanum_drive(double power)
   {
+    brw.setInverted(false);
+    frw.setInverted(false);
+
+
+    double t =Robot.m_oi.getJoystick().getThrottle();
+    t=RobotMap.lowpower+(RobotMap.highpower-RobotMap.lowpower)*((t+1)/2);
+
+
     double yspeed=Robot.m_oi.getJoystick().getY();
     double xspeed=Robot.m_oi.getJoystick().getX();
     double angle =Robot.m_oi.getJoystick().getTwist();
-    mecanum_drive.driveCartesian(yspeed,xspeed,angle);
+    mecanum_drive.driveCartesian(xspeed*t,yspeed*t,-angle*t);
     }
  }
