@@ -53,7 +53,7 @@ public class Drivetrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     
-    if(true){
+    if(false){
       setDefaultCommand(new Stickdrive(1.0));
     } else {
       setDefaultCommand(new DriveMecanum(1.0));
@@ -134,6 +134,6 @@ public class Drivetrain extends Subsystem {
     double yspeed=Robot.m_oi.getJoystick().getY();
     double xspeed=Robot.m_oi.getJoystick().getX();
     double angle =Robot.m_oi.getJoystick().getTwist();
-    mecanum_drive.driveCartesian(xspeed*t,yspeed*t,-angle*t);
+    mecanum_drive.driveCartesian(-xspeed*t,yspeed*t,-angle*t);
     }
  }

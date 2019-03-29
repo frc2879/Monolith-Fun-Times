@@ -31,8 +31,8 @@ public class RobotMap {
     public static final int lift = 0;
     public static final int joystick = 0;
 
-    public static final double lowpower = 0.2;
-    public static final double highpower = 0.6;
+    public static final double lowpower = 0.4;
+    public static final double highpower = 0.7;
 
 
 }
