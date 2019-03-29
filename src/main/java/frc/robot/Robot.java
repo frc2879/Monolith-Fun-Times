@@ -140,7 +140,7 @@ public class Robot extends TimedRobot {
 
     double t = m_oi.getJoystick().getThrottle();
   
-    if(t<=0.0)
+    if(t>=.0)
     {
       t = .9;
     }
