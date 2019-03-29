@@ -64,11 +64,11 @@ public class Drivetrain extends Subsystem {
     brw.setNeutralMode(NeutralMode.Brake);
     blw.setNeutralMode(NeutralMode.Brake);
     */
-    double rs=-(angle+speed)*power;
+    double rs=(speed-angle)*power;
     double ls=(speed+angle)*power;
-    double WWSG = -angle*spinWheelWeight; //Wheel Speed When SPinning in Place. They will be spinning at .45 percentn speed.
+    double WWSG = -angle*spinWheelWeight; //Wheel Speed When Spinning in Place. They will be spinning at 45 percent speed.
     
-    if(angle>0.1){ls=(-(ls+1.0))/2.0;rs=0.0;
+    if(angle>0.1){ls=((ls+1.0))/2.0;rs=0.0;
     }if(angle<-0.1){ rs=(rs+1.0)/2.0;ls=0.0;
     }if(Math.abs(speed)<.2){if(angle>0.0){flw.set(WWSG);blw.set(WWSG);frw.set(WWSG);brw.set(WWSG);return;
     }if(angle<0.0){frw.set(WWSG);brw.set(WWSG);flw.set(WWSG);blw.set(WWSG);return;}}    
@@ -77,9 +77,9 @@ public class Drivetrain extends Subsystem {
     System.out.println("s: "+speed);
     System.out.println("r: "+rs);
     System.out.println("l: "+ls);
-    frw.set(rs);
+    frw.set(-rs);
     flw.set(ls);
-    brw.set(rs);
+    brw.set(-rs);
     blw.set(ls);
     //System.out.println("motor speeds are being set to "+(angle-speed)+" and "+(speed+angle));
   } 
