@@ -59,7 +59,7 @@ public class OI {
     double in = stick.getX();
     double x = in*in;
 
-    if(x <= xDed)
+    if(Math.abs(x)<= xDed)
     {
       x = 0;
     }

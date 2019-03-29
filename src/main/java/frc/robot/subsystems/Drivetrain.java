@@ -40,10 +40,10 @@ public class Drivetrain extends Subsystem {
   public Drivetrain()
   {
     frw.setNeutralMode(NeutralMode.Coast);
-    frw.setInverted(true);
+   // frw.setInverted(true);
     flw.setNeutralMode(NeutralMode.Coast);
     brw.setNeutralMode(NeutralMode.Coast);
-    brw.setInverted(true);
+   // brw.setInverted(true);
     blw.setNeutralMode(NeutralMode.Coast);
     //DifferentialDrive m_drive = new DifferentialDrive(flw, frw);
     mecanum_drive = new  MecanumDrive(flw,blw,frw,brw);
@@ -110,9 +110,9 @@ public class Drivetrain extends Subsystem {
  
   public void mecanum_drive(double power)
   {
-    double yspeed=Robot.m_oi.getStickY();
-    double xspeed=Robot.m_oi.getStickX();
-    double angle =Robot.m_oi.getStickAngle();
+    double yspeed=Robot.m_oi.getJoystick().getY();
+    double xspeed=Robot.m_oi.getJoystick().getX();
+    double angle =Robot.m_oi.getJoystick().getTwist();
     mecanum_drive.driveCartesian(yspeed,xspeed,angle);
     }
  }
