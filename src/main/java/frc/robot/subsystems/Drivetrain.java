@@ -40,10 +40,10 @@ public class Drivetrain extends Subsystem {
   public Drivetrain()
   {
     frw.setNeutralMode(NeutralMode.Coast);
-   // frw.setInverted(true);
+    frw.setInverted(true);
     flw.setNeutralMode(NeutralMode.Coast);
     brw.setNeutralMode(NeutralMode.Coast);
-   // brw.setInverted(true);
+    brw.setInverted(true);
     blw.setNeutralMode(NeutralMode.Coast);
     //DifferentialDrive m_drive = new DifferentialDrive(flw, frw);
     mecanum_drive = new  MecanumDrive(flw,blw,frw,brw);
@@ -53,16 +53,18 @@ public class Drivetrain extends Subsystem {
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new Stickdrive(1.0));
-    setDefaultCommand(new DriveMecanum(1.0));
+    setDefaultCommand(new Stickdrive(0.5));
+    //setDefaultCommand(new DriveMecanum(1.0));
     //.out.println("you're initializing the default command for stickdrive");
   }
 
   public void stickdrive(double power)
   {
     //change inputs to stick vals 
-    double speed=Robot.m_oi.getStickY();
-    double angle =Robot.m_oi.getStickAngle();
+    double speed=Robot.m_oi.getJoystick().getY();
+    double angle =Robot.m_oi.getJoystick().getTwist();
+    speed*=Math.abs(speed);
+    angle*=Math.abs(angle);
 
     /*
     frw.setNeutralMode(NeutralMode.Brake);
@@ -70,10 +72,11 @@ public class Drivetrain extends Subsystem {
     brw.setNeutralMode(NeutralMode.Brake);
     blw.setNeutralMode(NeutralMode.Brake);
     */
-    double rs=-(speed-angle)*power;
-    double ls=(speed+angle)*power;
+    double rs=(speed+angle)*power;
+    double ls=(speed-angle)*power;
     double WWSG = -angle*spinWheelWeight; //Wheel Speed When Spinning in Place. They will be spinning at 45 percent speed.
     
+    /*
     if(angle>0.1){
       ls=(ls+1.0)/2.0;rs=0.0;
     }
@@ -98,6 +101,7 @@ public class Drivetrain extends Subsystem {
     }
     //System.out.println("you're calling stickdrive()! congratulations.");
     //System.out.println("speed/angle: "+speed+" , "+angle);
+    */
     System.out.println("s: "+speed);
     System.out.println("r: "+rs);
     System.out.println("l: "+ls);

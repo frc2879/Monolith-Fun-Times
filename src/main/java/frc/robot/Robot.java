@@ -164,6 +164,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    /*
     double y=Robot.m_oi.getJoystick().getY();
     double t=Robot.m_oi.getJoystick().getThrottle();
     int port = 0;
@@ -186,8 +187,9 @@ public class Robot extends TimedRobot {
       }
     }
     for(int i:ports){
-      d_subsystem.runMotor(ports[i],0);
+      d_subsystem.runWheel(ports[i],0);
     }
     d_subsystem.runMotor(ports[port],y);
   }
-}
+  */
+  }}
