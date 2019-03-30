@@ -163,33 +163,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    /*
-    double y=Robot.m_oi.getJoystick().getY();
-    double t=Robot.m_oi.getJoystick().getThrottle();
-    int port = 0;
-    int ports[] = {RobotMap.frw,RobotMap.flw,RobotMap.brw,RobotMap.blw};
-    if(t<-0.5){
-      port = 0;
-      System.out.println("fr: "+y);
-    } else {
-      if(t<0){
-        port = 1;
-        System.out.println("fl: "+y);
-      } else {
-        if(t<0.5){
-          port = 2;
-          System.out.println("br: "+y);
-        } else {
-          port = 3;
-          System.out.println("bl: "+y);
-        }
-      }
-    }
-    for(int i:ports){
-      d_subsystem.runWheel(ports[i],0);
-    }
-    d_subsystem.runMotor(ports[port],y);
-  }
-  */
+    
   }
 }

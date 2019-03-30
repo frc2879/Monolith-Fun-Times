@@ -17,9 +17,12 @@ import frc.robot.commands.Stickdrive;
 
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.RobotMap.DriveModes;
 
 import com.ctre.phoenix.Logger;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+
+
 
 
 /**
@@ -54,12 +57,13 @@ public class Drivetrain extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     
-    if(false){
+    if(RobotMap.driveMode == DriveModes.MECANUM){
       setDefaultCommand(new Stickdrive(1.0));
-    } else {
+    }
+    if(RobotMap.driveMode == DriveModes.STICK){
       setDefaultCommand(new DriveMecanum(1.0));
     }
-    //.out.println("you're initializing the default command for stickdrive");
+
   }
 
   public void stickdrive(double power)

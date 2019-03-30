@@ -15,6 +15,12 @@ package frc.robot;
  */
 public class RobotMap {
 
+    public enum DriveModes {
+        STICK,
+        MECANUM
+    }
+    public static DriveModes driveMode = DriveModes.MECANUM;
+
     public static final int frw = 4;
     public static final int flw = 2;
     public static final int brw = 1;
