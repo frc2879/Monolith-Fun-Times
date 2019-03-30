@@ -70,57 +70,22 @@ public class Drivetrain extends Subsystem {
 
     double t =Robot.m_oi.getJoystick().getThrottle();
     t=RobotMap.lowpower+(RobotMap.highpower-RobotMap.lowpower)*((t+1)/2);
-    //change inputs to stick vals 
-    double speed=Robot.m_oi.getJoystick().getY();
-    double angle =Robot.m_oi.getJoystick().getTwist();
-    speed*=Math.abs(speed);
-    angle*=Math.abs(angle);
 
-    /*
+    double speed=Robot.m_oi.getStickY();
+    double angle =Robot.m_oi.getStickAngle();
+
     frw.setNeutralMode(NeutralMode.Brake);
     flw.setNeutralMode(NeutralMode.Brake);
     brw.setNeutralMode(NeutralMode.Brake);
     blw.setNeutralMode(NeutralMode.Brake);
-    */
+
     double rs=(speed+angle)*power*t;
     double ls=(speed-angle)*power*t;
-    double WWSG = -angle*spinWheelWeight; //Wheel Speed When Spinning in Place. They will be spinning at 45 percent speed.
-    
-    /*
-    if(angle>0.1){
-      ls=(ls+1.0)/2.0;rs=0.0;
-    }
-    if(angle<-0.1){
-      rs=(rs+1.0)/2.0;ls=0.0;
-    }
-    if(Math.abs(speed)<.2){
-      if(angle>0.0){
-        flw.set(WWSG);
-        blw.set(WWSG);
-        frw.set(WWSG);
-        brw.set(WWSG);
-        return;
-      }
-     if(angle<0.0){
-       frw.set(WWSG);
-       brw.set(WWSG);
-       flw.set(WWSG);
-       blw.set(WWSG);
-       return;
-      }
-    }
-    //System.out.println("you're calling stickdrive()! congratulations.");
-    //System.out.println("speed/angle: "+speed+" , "+angle);
-    
-    System.out.println("s: "+speed);
-    System.out.println("r: "+rs);
-    System.out.println("l: "+ls);
-    */
+
     frw.set(rs);
     flw.set(ls);
     brw.set(rs);
     blw.set(ls);
-    //System.out.println("motor speeds are being set to "+(angle-speed)+" and "+(speed+angle));
     System.out.println("stickdrive input: r="+rs+" l="+ls);
   } 
  
@@ -134,9 +99,9 @@ public class Drivetrain extends Subsystem {
     t=RobotMap.lowpower+(RobotMap.highpower-RobotMap.lowpower)*((t+1)/2);
 
 
-    double yspeed=Robot.m_oi.getJoystick().getY();
-    double xspeed=Robot.m_oi.getJoystick().getX();
-    double angle =Robot.m_oi.getJoystick().getTwist();
+    double yspeed=Robot.m_oi.getStickY();
+    double xspeed=Robot.m_oi.getStickX();
+    double angle =Robot.m_oi.getStickAngle();
     mecanum_drive.driveCartesian(-xspeed*t*0.75,yspeed*t,-angle*t);
     System.out.println("mecanum input: x="+(-xspeed*t*0.75)+" y="+(yspeed*t)+" a="+(-angle*t));
     }

@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
   private WPI_TalonSRX brwheel;
   private WPI_TalonSRX blwheel;
   */
-  private  WPI_TalonSRX lift;
+  //private  WPI_TalonSRX lift;
   public static final Pecker p_subsystem= new Pecker();
   public static final Cone c_subsystem = new Cone();
   public static final Drivetrain d_subsystem = new Drivetrain();
@@ -58,7 +58,7 @@ public class Robot extends TimedRobot {
     brwheel = new WPI_TalonSRX(RobotMap.brw);
     blwheel = new WPI_TalonSRX(RobotMap.blw);
     */
-    lift = new WPI_TalonSRX(RobotMap.lift);
+    //lift = new WPI_TalonSRX(RobotMap.lift);
     CameraServer camera = CameraServer.getInstance();
     VideoSource front = camera.startAutomaticCapture("cam0" , 0);
     VideoSource back = camera.startAutomaticCapture("cam1" , 1);
@@ -191,4 +191,5 @@ public class Robot extends TimedRobot {
     d_subsystem.runMotor(ports[port],y);
   }
   */
-  }}
+  }
+}

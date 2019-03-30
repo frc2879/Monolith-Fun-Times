@@ -55,71 +55,33 @@ public class OI {
 
   public double getStickX()
   {
-    double xDed = .2;
-    double in = stick.getX();
-    double x = in*in;
-
-    if(Math.abs(x)<= xDed)
+    double x = (stick.getX()*Math.abs(stick.getX()));
+    if(Math.abs(x)<= RobotMap.xDead)
     {
       x = 0;
     }
-
-    else
-    {
-      x = (x - (x-xDed)/(1-xDed));
-    }
-
-    if(in<0)
-    {
-      x = -x;
-    }
-      //System.out.println("sx: "+x);
       return x;
   }
-
+  
   public double getStickY()
   {
-    double yDed = .2;
-    double in = stick.getY();
-    double y = in*in;
-
-    if(Math.abs(y)<= yDed)
+    double y = (stick.getY()*Math.abs(stick.getY()));
+    if(Math.abs(y)<= RobotMap.yDead)
     {
       y = 0;
     }
-    /*
-    else
-    {
-      y = (y - (y-yDed)/(1-yDed));
-    }
-    
-    if(y<0)
-    {
-      y = -y;
-    }
-    */
-    //System.out.println("sy: "+y);
-    return y;
+      return y;
   }
-  public double getStickAngle() {
   
-  
-		double aDed = .2;
-		double in = stick.getTwist();
-		double a = in*in;
-		if (Math.abs(a) <= aDed) {
-			a=0;
-        } 
-    /*	}else {
-			a = (a-aDed)/(1-aDed);
-		}
-		if (in<0) {
-			a=-a;
+  public double getStickAngle()
+  {
+    double a = (stick.getTwist()*Math.abs(stick.getTwist()));
+    if(Math.abs(a)<= RobotMap.aDead)
+    {
+      a = 0;
     }
-    */
-    //System.out.println("sa: "+a);
-		return a;
-	}
+      return a;
+  }
 
   public OI()
   {
