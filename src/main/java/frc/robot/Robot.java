@@ -155,9 +155,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
+    System.out.println("teleop tick");
     Scheduler.getInstance().run();
-    System.out.println("tele tick");
-    
   }
   /**
    * This function is called periodically during test mode.

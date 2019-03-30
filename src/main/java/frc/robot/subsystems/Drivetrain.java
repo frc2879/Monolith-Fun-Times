@@ -18,6 +18,7 @@ import frc.robot.commands.Stickdrive;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
+import com.ctre.phoenix.Logger;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 
@@ -110,15 +111,17 @@ public class Drivetrain extends Subsystem {
     }
     //System.out.println("you're calling stickdrive()! congratulations.");
     //System.out.println("speed/angle: "+speed+" , "+angle);
-    */
+    
     System.out.println("s: "+speed);
     System.out.println("r: "+rs);
     System.out.println("l: "+ls);
+    */
     frw.set(rs);
     flw.set(ls);
     brw.set(rs);
     blw.set(ls);
     //System.out.println("motor speeds are being set to "+(angle-speed)+" and "+(speed+angle));
+    System.out.println("stickdrive input: r="+rs+" l="+ls);
   } 
  
   public void mecanum_drive(double power)
@@ -134,6 +137,7 @@ public class Drivetrain extends Subsystem {
     double yspeed=Robot.m_oi.getJoystick().getY();
     double xspeed=Robot.m_oi.getJoystick().getX();
     double angle =Robot.m_oi.getJoystick().getTwist();
-    mecanum_drive.driveCartesian(-xspeed*t,yspeed*t,-angle*t);
+    mecanum_drive.driveCartesian(-xspeed*t*0.75,yspeed*t,-angle*t);
+    System.out.println("mecanum input: x="+(-xspeed*t*0.75)+" y="+(yspeed*t)+" a="+(-angle*t));
     }
  }

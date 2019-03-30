@@ -35,6 +35,8 @@ public class Cone extends Subsystem {
   public void openingNoid(boolean pressure)
   { 
     coneOperation.set(pressure);
+
+    System.out.println("CONE IS " + (pressure ? "OUT": "IN"));
   }
 
   
