@@ -8,7 +8,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.Peck;
 import frc.robot.commands.Bite;
@@ -18,7 +17,12 @@ import frc.robot.commands.Bite;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-  //// CREATING BUTTONS
+
+private static Joystick stick = new Joystick(RobotMap.joystick);
+public static JoystickButton pecking = new JoystickButton(stick, 1);
+public static JoystickButton biting = new JoystickButton(stick, 2);
+
+//// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a
   //// joystick.
   // You create one by telling it which joystick it's on and which button
@@ -46,7 +50,7 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-  private Joystick stick;
+  
 
   public Joystick getJoystick()
   {
@@ -85,9 +89,8 @@ public class OI {
 
   public OI()
   {
-    stick = new Joystick(RobotMap.joystick);
-    new JoystickButton(stick, 1).toggleWhenPressed(new Peck(true));
-    new JoystickButton(stick, 2).whileHeld(new Bite(true));
+    pecking.toggleWhenPressed(new Peck(true));
+    biting.whileHeld(new Bite(true));
   }
 
 }

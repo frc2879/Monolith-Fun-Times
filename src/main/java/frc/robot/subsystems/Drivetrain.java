@@ -19,7 +19,6 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.RobotMap.DriveModes;
 
-import com.ctre.phoenix.Logger;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 
@@ -38,8 +37,6 @@ public class Drivetrain extends Subsystem {
   WPI_TalonSRX blw = new WPI_TalonSRX(RobotMap.blw);
   MecanumDrive mecanum_drive;
   //DifferentialDrive mh_drive;
-  
-  private static final double spinWheelWeight = .45;
   
   public Drivetrain()
   {

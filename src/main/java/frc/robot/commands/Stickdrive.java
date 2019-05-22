@@ -10,17 +10,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Drivetrain;
 
 public class Stickdrive extends Command {
-  private double speed;
-  private double angle;
   private double power;
   public Stickdrive(double p) {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    
-  
+    // eg. requires(chassis); 
     power = p;
     requires(Robot.d_subsystem);
   }

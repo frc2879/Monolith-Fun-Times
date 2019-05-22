@@ -7,11 +7,9 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.Peck;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Compressor;
 
 
 /**

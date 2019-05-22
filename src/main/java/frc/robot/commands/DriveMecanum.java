@@ -10,11 +10,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Drivetrain;
 
 public class DriveMecanum extends Command {
-  private double speed;
-  private double angle;
   private double power;
   
   public DriveMecanum(double p) {
