@@ -7,12 +7,9 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.Peck;
 import frc.robot.commands.Bite;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Compressor;
 
 
 /**
@@ -35,6 +32,8 @@ public class Cone extends Subsystem {
   public void openingNoid(boolean pressure)
   { 
     coneOperation.set(pressure);
+
+    System.out.println("CONE IS " + (pressure ? "OUT": "IN"));
   }
 
   

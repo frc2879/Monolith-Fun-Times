@@ -11,11 +11,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Stickdrive extends Command {
+public class DriveMecanum extends Command {
   private double power;
-  public Stickdrive(double p) {
+  
+  public DriveMecanum(double p) {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis); 
+    // eg. requires(chassis);
+  
     power = p;
     requires(Robot.d_subsystem);
   }
@@ -29,7 +31,7 @@ public class Stickdrive extends Command {
   @Override
   protected void execute() {
     //System.out.println("you're executing the Stickdrive class.");
-    Robot.d_subsystem.stickdrive(power);
+    Robot.d_subsystem.mecanum_drive(power);
     //System.out.println("speed and angle are "+ speed +", "+angle);
   }
 

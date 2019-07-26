@@ -8,13 +8,20 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import frc.robot.commands.DriveMecanum;
 import frc.robot.commands.Stickdrive;
+
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.RobotMap.DriveModes;
+
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+
+
 
 
 /**
@@ -28,96 +35,75 @@ public class Drivetrain extends Subsystem {
   WPI_TalonSRX flw = new WPI_TalonSRX(RobotMap.flw);
   WPI_TalonSRX brw = new WPI_TalonSRX(RobotMap.brw);
   WPI_TalonSRX blw = new WPI_TalonSRX(RobotMap.blw);
-  //DifferentialDrive m_drive;
-  
-  private static final double spinWheelWeight = .45;
-  
-
-
+  MecanumDrive mecanum_drive;
+  //DifferentialDrive mh_drive;
   
   public Drivetrain()
   {
     frw.setNeutralMode(NeutralMode.Coast);
     flw.setNeutralMode(NeutralMode.Coast);
     brw.setNeutralMode(NeutralMode.Coast);
+    
     blw.setNeutralMode(NeutralMode.Coast);
     //DifferentialDrive m_drive = new DifferentialDrive(flw, frw);
+    mecanum_drive = new  MecanumDrive(flw,blw,frw,brw);
 
   }
   
-
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    //setDefaultCommand(new Stickdrive(Robot.m_oi.getStickX(),Robot.m_oi.getStickAngle()));
-    //.out.println("you're initializing the default command for stickdrive");
+    
+    if(RobotMap.driveMode == DriveModes.MECANUM){
+      setDefaultCommand(new Stickdrive(1.0));
+    }
+    if(RobotMap.driveMode == DriveModes.STICK){
+      setDefaultCommand(new DriveMecanum(1.0));
+    }
+
   }
 
   public void stickdrive(double power)
   {
-    //change inputs to stick vals 
-    double speed=Robot.m_oi.getJoystick().getY();
+
+    brw.setInverted(true);
+    frw.setInverted(true);
+
+    double t =Robot.m_oi.getJoystick().getThrottle();
+    t=RobotMap.lowpower+(RobotMap.highpower-RobotMap.lowpower)*((t+1)/2);
+
+    double speed=Robot.m_oi.getStickY();
     double angle =Robot.m_oi.getStickAngle();
 
-
-    /*
     frw.setNeutralMode(NeutralMode.Brake);
     flw.setNeutralMode(NeutralMode.Brake);
     brw.setNeutralMode(NeutralMode.Brake);
     blw.setNeutralMode(NeutralMode.Brake);
-    */
-    
-    double rs=-(angle+speed)*power;
-    double ls=(speed+angle)*power;
 
+    double rs=(speed+angle)*power*t;
+    double ls=(speed-angle)*power*t;
 
-    double WWSG = -angle*spinWheelWeight; //Wheel Speed When SPinning in Place. They will be spinning at .45 percentn speed.
-    
-    if(angle>0.1){
-      ls=(-(ls+1.0))/2.0;
-      rs=0.0;
-    }
-
-    if(angle<-0.1)
-    {
-      rs=(rs+1.0)/2.0;
-      ls=0.0;
-    }
-
-    if(Math.abs(speed)<.2){
-      if(angle>0.0){
-        flw.set(WWSG);
-        blw.set(WWSG);
-        frw.set(WWSG);
-        brw.set(WWSG);
-        return;
-      }
-  
-      
-      if(angle<0.0)
-      {
-        frw.set(WWSG);
-        brw.set(WWSG);
-        flw.set(WWSG);
-        blw.set(WWSG);
-        return;
-      }
-    }
-    
-    //System.out.println("you're calling stickdrive()! congratulations.");
-    //System.out.println("speed/angle: "+speed+" , "+angle);
-    System.out.println("s: "+speed);
-    System.out.println("r: "+rs);
-    System.out.println("l: "+ls);
     frw.set(rs);
     flw.set(ls);
     brw.set(rs);
     blw.set(ls);
-    //System.out.println("motor speeds are being set to "+(angle-speed)+" and "+(speed+angle));
+    System.out.println("stickdrive input: r="+rs+" l="+ls);
+  } 
+ 
+  public void mecanum_drive(double power)
+  {
+    brw.setInverted(false);
+    frw.setInverted(false);
 
-  }
 
-  
+    double t =Robot.m_oi.getJoystick().getThrottle();
+    t=RobotMap.lowpower+(RobotMap.highpower-RobotMap.lowpower)*((t+1)/2);
 
-}
+
+    double yspeed=Robot.m_oi.getStickY();
+    double xspeed=Robot.m_oi.getStickX();
+    double angle =Robot.m_oi.getStickAngle();
+    mecanum_drive.driveCartesian(-xspeed*t*0.75,yspeed*t,-angle*t);
+    System.out.println("mecanum input: x="+(-xspeed*t*0.75)+" y="+(yspeed*t)+" a="+(-angle*t));
+    }
+ }
